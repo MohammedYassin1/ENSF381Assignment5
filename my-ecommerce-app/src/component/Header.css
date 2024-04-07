@@ -1,0 +1,35 @@
+.header {
+    display: flex;
+    flex-direction: column;
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container {
+    flex: 1;
+}
+
+.logo {
+    height: 50px;
+}
+
+.nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.company-name {
+    flex: 1;
+    text-align: right;
+}
