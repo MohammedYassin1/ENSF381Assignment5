@@ -1,8 +1,11 @@
 from flask import Flask, request, jsonify, send_from_directory
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 import json
 import os
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 users = []
 
