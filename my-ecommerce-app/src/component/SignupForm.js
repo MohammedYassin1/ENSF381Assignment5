@@ -16,9 +16,12 @@ const SignupForm = ({ onSwitch }) => {
                     setMessage(response.data.message); // Update the message
                 })
                 .catch(error => {
-                    console.error('Error registering: ', error);
+                    console.error('Error registering: ', error.response.data);
                     setMessage('Failure: Could not register'); // Update the message
                 });
+        }
+        else if (password !== confirmPassword) {
+            setMessage('Passwords do not match'); // Update the message
         }
     };
 

@@ -1,21 +1,27 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const LoginForm = ({ onSwitch }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [message, setMessage] = useState(''); // Add this line
+    const [message, setMessage] = useState('');
+    const navigate = useNavigate(); // Create a navigate object
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (username && password) {
             axios.post('http://127.0.0.1:5000/login', { username, password })
                 .then(response => {
-                    setMessage(response.data.message); // Update the message
+                    setMessage(response.data.message);
+                    if (response.data.message === 'Login successful') {
+                        localStorage.setItem('token', response.data.token); // Store the token in local storage
+                        navigate('/products'); // Redirect to the products page
+                    }
                 })
                 .catch(error => {
                     console.error('Error logging in: ', error);
-                    setMessage('Failure: Could not log in'); // Update the message
+                    setMessage('Failure: Could not log in');
                 });
         }
     };
@@ -30,7 +36,7 @@ const LoginForm = ({ onSwitch }) => {
             </div>
             <button type="submit">Login</button>
             <button type="button" onClick={onSwitch}>Switch to Signup</button>
-            {message && <div>{message}</div>} {/* Display the message */}
+            {message && <div>{message}</div>}
         </form>
     );
 };

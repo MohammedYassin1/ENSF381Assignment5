@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify, send_from_directory
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 import json
 import os
 from flask_cors import CORS
@@ -89,7 +88,7 @@ def register():
     email = request.json.get('email')
 
     if any(user['username'] == username for user in users):
-        return jsonify({'message': 'Username already exists'}), 400
+        return jsonify({'message': 'Username already exists'}), 202
 
     users.append({
         'username': username,
